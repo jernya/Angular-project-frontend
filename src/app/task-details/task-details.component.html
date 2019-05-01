@@ -1,0 +1,49 @@
+<div class="container ">
+
+    <div class = "pull-left">
+        <span>Show</span>
+        <!-- [(ngModel)] = "selectedRecordsOption" -->
+        <select  [ngModel] = "selectedRecordsOption" (ngModelChange) = "getCurrentRecords($event)">
+            <option *ngFor = "let op of recordsOptions"
+           [selected] = "op.name =='10'">{{op.name}} </option>
+
+        </select>
+        <span>entries  </span>
+    </div>
+
+
+    <div style="display:inline-block" class = "pull-right" >
+        <span>Order by: </span>
+        <select  [ngModel] = "selectedOrderOption" (ngModelChange) = "getCurrentOrder($event)">
+            <option  *ngFor = "let order of orderOptions">{{order.name}}</option>
+        </select>
+        <div style="display:inline-block">
+            <label for="descending" >Descending:</label>
+            <input type="checkbox" [(ngModel)]= "selectedDecending" (ngModelChange) ="getCurrentDescending(event)">
+        </div>
+        <span style="display:inline-block; width:5em"></span>
+
+        <div style="display:inline-block" >
+                <label for="search" >Search</label>
+                <input [(ngModel)]="searchText" >
+        </div>
+    </div>
+    <br>
+    <br>
+    
+    <!-- <app-footer [recordsPerPage] = selectedRecordsOption 
+    (IndexChanged) = "indexChangedHandler($event)"
+    (pageChanged) = "pageChangedHandler($event)"></app-footer> -->
+    
+    <div>
+        <app-table-item  
+        *ngFor="let task_row of task_details |sorting:path:order | filter:searchText; let i = index "
+        [task] = "task_row"
+        [start]= "startIndex"
+        [index] = "i + startIndex"> </app-table-item>
+    </div>
+
+    <app-footer [recordsPerPage] = selectedRecordsOption 
+    (IndexChanged) = "indexChangedHandler($event)"
+    (pageChanged) = "pageChangedHandler($event)"></app-footer>
+</div>

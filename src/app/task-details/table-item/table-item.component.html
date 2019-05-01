@@ -1,0 +1,140 @@
+<div class="table-responsive">
+    <table class = 'table' style=" table-layout: fixed">
+        <tr *ngIf = "index == start">
+            <th>Quote Type</th>
+            <th>Queto#</th>
+            <th>Contact</th>
+            <th style=" width: 30em">Task</th>
+            <th>Due Date</th>
+            <th>Task Type</th>
+            <th>        </th>
+        </tr>
+        <tr>
+            <td>{{task.quote_type}}</td>
+            <td>{{task.quote_num}}</td>
+            <td>{{task.contact}}</td>
+            <td style=" width: 30em">{{task.task_desc}}</td>
+            <td>{{task.due_date}}</td>
+            <td>{{task.task_type}}</td>
+            <td>
+                <a (click)="openViewDialog()"> <i class="glyphicon glyphicon-eye-open"></i></a>
+                <span style ="display:inline-block; width: 1em"> </span>
+                <a (click)="openEditDialog()"> <i class="glyphicon glyphicon-edit"></i> </a>
+                <span style ="display:inline-block; width: 1em"> </span>
+                <a > <i class="glyphicon glyphicon-comment"></i> </a>
+            </td>
+        </tr>
+                
+    </table>
+
+    <div class="modal" tabindex="-1" role="dialog"  [ngStyle]="{'display':displayView}">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div>
+                        <p>Status: {{task.status}}</p>
+                        <p>Quote Type: {{task.quote_type}}</p>
+                        <p>Quote num: {{task.quote_num}}</p>
+                        <p>Task Type: {{task.task_type}}</p>
+                        <p>Contact Name: {{task.contact}}</p>
+                        <p>Quote: {{task.quote_desc}}</p>
+                        <p>Due Date: {{task.due_date}}</p>
+                        <p>Task Description: {{task.task_desc}}</p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" (click)="closeViewDialog()" >Close</button>
+                </div>
+            </div>
+        </div>
+    </div>  
+
+
+
+    <div class="modal" tabindex="-1" role="dialog"  [ngStyle]="{'display':displayEdit}">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <form [formGroup]="rowForm" class="form-horizontal" (ngSubmit)="onSubmit()">
+                        <div class="form-group form-group-md text-left">
+                            <label class="col-sm-2 control-label " for="status">Status</label>
+                            <div class=" col-xs-4 col-sm-4 col-md-6 col-lg-5">
+                            <select >
+                                <option value="open" selected = "{{openStatus}}">Open</option>
+                                <option value="close" selected = "{{closedStatus}}">Closed</option>
+                            </select>
+                            </div>
+                        </div>
+                        <div class="form-group form-group-md text-left">
+                            <label class="col-sm-2 control-label " for="quote_type">Quote Type</label>
+                            <div class="col-xs-4 col-sm-4 col-md-6 col-lg-4">
+                                <input class="form-control" type="text" id="quote_type" formControlName="quote_type" >
+                            </div>
+                            <label class="col-sm-2 control-label text-left" for="quote_num">Quote Num</label>
+                            <div class="col-xs-2 col-sm-2 col-md-3 col-lg-2">
+                                <input class="form-control" type="text" id="quote_num" formControlName="quote_num" >
+                            </div>
+                        </div>
+                        <div class="form-group form-group-md ">
+                            <label class="col-sm-2 control-label" for="task_type">Task Type</label>
+                            <div class=" col-sm-6 col-md-6 col-lg-5">
+                            <input class="form-control" type="text" id="task_type" formControlName="task_type" >
+                            </div>
+                        </div>
+                        <div class="form-group form-group-md ">
+                            <label class="col-sm-2 control-label" for="contact">Contact Name</label>
+                            <div class="col-xs-4 col-sm-4 col-md-6 col-lg-5">
+                            <input class="form-control" type="text" id="contact" formControlName="contact" >
+                            </div>
+                        </div>
+                        <div class="form-group form-group-md ">
+                            <label class="col-sm-2 control-label" for="quote_desc">Quote</label>
+                            <div class="col-xs-4 col-sm-4 col-md-6 col-lg-5">
+                                <input class="form-control" type="text" id="quote_desc" formControlName="quote_desc" >
+                            </div>
+                        </div>
+                        <div class="form-group  ">
+                            <label class="col-sm-2 control-label" for="due_date">Due Date</label>
+                            <div class="col-xs-4 col-sm-4 col-md-6 col-lg-5 form-group">
+                                <input
+                                    class="form-control"
+                                    #dpMDY="bsDatepicker"
+                                    bsDatepicker
+                                    formControlName="due_date"
+                                    [bsConfig]="{ dateInputFormat: 'MM/DD/YYYY' }">
+                            </div>
+                            <div class="col-xs-12 col-12 col-md-3 form-group">
+                                <a (click)="dpMDY.toggle()" [attr.aria-expanded]="dpMDY.isOpen"> 
+                                <i class="glyphicon glyphicon-calendar" style="font-size: 2em"></i></a>
+                            </div>
+                            <!-- <timepicker class = "inline-block" [formControlName]="Time"></timepicker> -->
+                            <div class="col-xs-2 col-sm-2 col-md-4 col-lg-3">
+                                <input class="form-control" type="time" id="time" formControlName="Time" >
+                            </div>
+                           
+                            
+                        </div>
+                
+                        <div class="form-group form-group-md ">
+                            <label class="col-sm-2 control-label" for="task_desc">Task Description</label>
+                            <div class="col-xs-10 col-sm-10 col-md-10 col-lg-12 pull-right ">
+                            <textarea class="form-control" row="6" id="task_desc" formControlName="task_desc" ></textarea>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary" [disabled]="!rowForm.valid" 
+                    (click)="onSubmit()">
+                    <i class="glyphicon glyphicon-save-file"></i>Update</button>
+                    <span style ="display:inline-block; width: 1em"> </span>  
+                    <button type="button" class="btn btn-primary" (click)="closeEditDialog()">
+                    <i class="glyphicon glyphicon-remove"></i>Cancel</button>
+                    
+                </div>
+            </div>
+        </div>
+    </div> 
+    
+    
+</div>

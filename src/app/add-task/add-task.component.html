@@ -1,0 +1,85 @@
+<div class ="container">
+    
+<div class="row">
+    <div class="col-xs-12">
+        <form [formGroup]="TaskForm" class="form-horizontal" (ngSubmit)="onSubmit()" >
+            <div class="form-group form-group-md text-left">
+                <label class="col-sm-2 control-label " for="status">Status</label>
+                <div class=" col-xs-4 col-sm-4 col-md-6 col-lg-5">
+                <input class="form-control" type="text" id="status" formControlName="status" >
+                </div>
+            </div>
+            <div class="form-group form-group-md text-left">
+                <label class="col-sm-2 control-label " for="quote_type">Quote Type</label>
+                <div class="col-xs-4 col-sm-4 col-md-6 col-lg-5">
+                <input class="form-control" type="text" id="quote_type" formControlName="quote_type" >
+                </div>
+                <label class="col-sm-2 control-label text-left" for="quote_num">Quote Num</label>
+                <div class="col-xs-2 col-sm-2 col-md-3 col-lg-2">
+                <input class="form-control" type="text" id="quote_num" formControlName="quote_num" >
+                </div>
+            </div>
+            <div class="form-group form-group-md ">
+                <label class="col-sm-2 control-label" for="task_type">Task Type</label>
+                <div class=" col-sm-6 col-md-6 col-lg-5">
+                <input class="form-control" type="text" id="task_type" formControlName="task_type" >
+                </div>
+            </div>
+            <div class="form-group form-group-md ">
+                <label class="col-sm-2 control-label" for="contact">Contact Name</label>
+                <div class="col-xs-4 col-sm-4 col-md-6 col-lg-5">
+                <input class="form-control" type="text" id="contact" formControlName="contact" >
+                </div>
+            </div>
+            <div class="form-group form-group-md ">
+                <label class="col-sm-2 control-label" for="quote_desc">Quote</label>
+                <div class="col-xs-4 col-sm-4 col-md-6 col-lg-5">
+                    <input class="form-control" type="text" id="quote_desc" formControlName="quote_desc" >
+                </div>
+            </div>
+            <div class="form-group form-group-md ">
+                <label class="col-sm-2 control-label" for="due_date">Due Date</label>
+                <!-- <div class="col-xs-2 col-sm-2 col-md-4 col-lg-3">
+                    <input class="form-control" type="date" id="date" formControlName="due_date" >
+                </div> -->
+                <div class="col-xs-4 col-sm-4 col-md-6 col-lg-5 form-group">
+                    <input
+                        class="form-control"
+                        #dpMDY="bsDatepicker"
+                        bsDatepicker
+                        formControlName="due_date"
+                        [bsConfig]="{ dateInputFormat: 'MM/DD/YYYY' }">
+                </div>
+                <div class="col-xs-12 col-12 col-md-3 form-group">
+                    <a (click)="dpMDY.toggle()" [attr.aria-expanded]="dpMDY.isOpen"> 
+                    <i class="glyphicon glyphicon-calendar" style="font-size: 2em"></i></a>
+                </div>
+                <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                    <input class="form-control" type="time" id="time" formControlName="Time" >
+                </div>
+            </div>
+    
+            <div class="form-group form-group-md ">
+                
+                <label class="col-sm-2 control-label" for="task_desc">Task Description</label>
+                <div class="col-xs-10 col-sm-10 col-md-10 col-lg-12 pull-right ">
+                <textarea class="form-control" row="6" id="task_desc" formControlName="task_desc" ></textarea>
+                </div>
+            </div>
+    
+            <div class="row pull-right " >
+                <div class="col-xs-12  col-lg-12 "  style ="display:inline-block">
+                    <button
+                    type="submit"
+                    class="btn btn-primary">Add Task</button>
+                    
+                </div>
+            </div>
+                
+        
+            </form>
+    </div>
+</div>  
+</div>
+      
+      

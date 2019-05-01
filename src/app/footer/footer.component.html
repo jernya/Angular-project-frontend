@@ -1,0 +1,20 @@
+<div class="container" >
+    <div class ="pull-left " style="padding-top: 3%">
+        Showing {{pager.startIndex}} to {{pager.endIndex}} of {{pager.totalItems}} entries
+    </div> 
+    <div class = "pull-right d-inline-block" >
+        <ul *ngIf="pager.pages && pager.pages.length" class="pagination" >
+            
+            <li [ngClass]="{disabled:pager.currentPage === 1}">
+                    <a (click)="setPage(pager.currentPage - 1)">Previous</a>
+            </li>
+            <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
+                <a (click)="setPage(page)">{{page}}</a>
+            </li>
+            <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+                <a (click)="setPage(pager.currentPage + 1)">Next</a>
+            </li>
+            
+        </ul>
+    </div>
+</div>
