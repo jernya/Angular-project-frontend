@@ -5,11 +5,6 @@
     border-left: 10px solid rgb(218, 200, 43); /* yellow */
 }
 
-/* .ng-invalid:not(form)  {
-    font-size: 16px;
-    text-decoration: none;
-    border: 1px solid #e94646; 
-} */
 .ng-invalid:not(form).ng-touched{
     font-size: 16px;
     /* text-align: center; */
